@@ -1,0 +1,148 @@
+
+#include <iostream>
+
+#include <string> 
+
+using namespace std;
+template <typename T>
+class Human {
+private:
+    T name;
+    int age;
+public:
+    Human( T n = T(), int a = 0) : name(n), age(a) {}
+
+    void display() {
+        cout << "Имя: " << name << ", Возраст: " << age;
+    }
+
+    void input() {
+
+        cout << "Введите имя: ";
+        cin >> name;
+        cout << "Введите возраст: ";
+        cin >> age;
+    }
+
+    T getName() const { return name; }
+    int getAge() const { return age; }
+};
+
+class Preschooler : public Human<string> {
+public:
+    string kindergarten;
+
+    void display() {
+        Human::display();
+        cout << ", Детский сад: " << kindergarten << endl;
+    }
+
+    void input() {
+        Human::input();
+        cout<< "Введите детский сад: ";
+        cin >> kindergarten;
+    }
+};
+
+class Schooler : public Human<string> {
+public:
+    string school;
+    int grade;
+
+    void display() {
+        Human::display();
+        cout<< ", Школа: " << school << ", Класс: " << grade << endl;
+    }
+    void input() {
+        Human::input();
+        cout<< "Введите школу: ";
+        cin >> school;
+        cout << "Введите класс: ";
+        cin >> grade;
+    }
+
+};
+
+class Student : public Human<string> {
+public:
+    string university;
+    int year;
+
+    void display() {
+        Human::display();
+        cout << ", ВУЗ: " << university << ", Курс: " << year << endl;
+    }
+    void input() {
+        Human::input();
+        cout << "Введите ВУЗ: ";
+        cin >> university;
+        cout << "Введите курс: ";
+        cin >> year;
+    }
+};
+
+class Worker : public Human<string> {
+public:
+    string company;
+    double salary;
+
+    void display() {
+        Human::display();
+        cout << ", Компания: " << company << ", Зарплата: " << salary << endl;
+    }
+    void input() {
+        Human::input();
+        cout << "Введите компанию: ";
+        cin >> company;
+        cout << "Введите зарплату: ";
+        cin >> salary;
+    }
+};
+
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    int choice;
+    cout << "Выберите жизненную позицию человека:"<<endl;
+    cout << "1 - Дошкольник"<<endl;
+    cout << "2 - Школьник" << endl;
+    cout << "3 - Студент" << endl;
+    cout << "4 - Работающий" << endl;
+    cout << "Ваш выбор: ";
+    cin >> choice;
+
+    switch (choice) {
+        case 1: {
+            Preschooler person;
+            person.input();
+            cout << "\n=== Данные дошкольника ===" << endl;
+            person.display();
+            break;
+        }
+        case 2: {
+            Schooler person;
+            person.input();
+            cout << "\n=== Данные школьника ===" << endl;
+            person.display();
+            break;
+        }
+        case 3: {
+            Student person;
+            person.input();
+            cout << "\n=== Данные студента ===" << endl;
+            person.display();
+            break;
+        }
+        case 4: {
+            Worker person;
+            person.input();
+            cout << "\n=== Данные работающего ===" << endl;
+            person.display();
+            break;
+        }
+        default:
+            cout << "Неверный выбор!\n";
+    }
+    return 0;
+}

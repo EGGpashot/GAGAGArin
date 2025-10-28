@@ -1,0 +1,66 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+class Store {
+private:
+    string storeName;
+    vector<string> products;
+
+public:
+    Store() {
+        storeName = "Магазин";
+        cout << "Создан магазин по умолчанию: " << storeName << endl;
+    }
+
+    Store(const string& name, const string& productName) {
+        storeName = name;
+        products.push_back(productName);
+        cout << "Создан магазин '" << storeName << "' с продуктом: " << productName << endl;
+    }
+
+    ~Store() {
+        cout << "Закрытие соединения с базой данных для магазина: " << storeName << endl;
+        products.clear();
+        cout << "Все продукты удалены из склада" << endl;
+    }
+
+    void showProducts() {
+        cout << "Продукты в '" << storeName << "': ";
+        if (products.empty()) {
+            cout << "пусто";
+        }
+        else {
+            for (const auto& product : products) {
+                cout << product << " ";
+            }
+        }
+        cout << endl;
+    }
+
+    void addProduct(const string& productName) {
+        products.push_back(productName);
+        cout << "Добавлен: " << productName << endl;
+    }
+};
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    cout << "=== Демонстрация ===" << endl;
+
+    Store store1;
+    store1.showProducts();
+
+    Store store2("Продуктовый", "Хлеб");
+    store2.showProducts();
+
+    store2.addProduct("Молоко");
+    store2.addProduct("Яблоки");
+    store2.addProduct("Сухааааааааааааааааарикиииииииии");
+    store2.showProducts();
+
+    cout << "=== Конец ===" << endl;
+    return 0;
+}
